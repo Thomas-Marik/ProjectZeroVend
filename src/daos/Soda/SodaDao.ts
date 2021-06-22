@@ -1,6 +1,7 @@
 import { ISoda } from '@entities/Soda';
-
-
+import {ddbDoc} from '../dynamoDoc';
+import { DeleteItemCommand, GetItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import {PutCommand} from '@aws-sdk/lib-dynamodb';
 
 
 
@@ -14,7 +15,7 @@ export interface ISodaDao {
 
 class SodaDao implements ISodaDao {
     
-
+    private TABLE_NAME = 'vendingmachine';
     /**
      * @param email
      */
@@ -38,9 +39,30 @@ class SodaDao implements ISodaDao {
      * @param user
      */
     public async add(soda: ISoda): Promise<void> {
-         // TODO
-        return Promise.resolve(undefined);
+        const params = 
+       {
+            TableName: this.TABLE_NAME,
+            Item:   {
+                    id: { S: soda.id },
+                    brand: {S :soda.brand},
+                    distributor: {S:soda.distributor},
+                    diet:{B:soda.diet},
+                    caffeine: {B:soda.caffeine},
+                    color:{S:soda.color}
+        
+                    }
+        };
+        
+        try {
+                const data = await ddbDoc.send(new PutCommand(params));
+                console.log(data);                
+            } catch (err) 
+                {
+                   console.error(err);
+                }
     }
+       
+    
 
 
     /**
