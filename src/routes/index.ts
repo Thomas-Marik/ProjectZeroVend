@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Users';
+import { getAllUsers, addOneUser, updateOneUser, deleteOneUser } from './Sodas';
 
 
 // User-route
