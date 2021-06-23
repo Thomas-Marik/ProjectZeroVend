@@ -1,9 +1,11 @@
-import { DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb'
-import {ddbClient} from './dynamo';
-// Set the AWS Region.
-const REGION = "us-east-2"; //e.g. "us-east-1"
-                                               
+/*import { DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb'
+import { DynamoDBClient} from "@aws-sdk/client-dynamodb";
 
+import {ddbClient} from './dynamo';
+import {config} from "dotenv";
+config();
+const REGION="us-east-2";
+const ddb:DynamoDBClient = new DynamoDBClient({region: REGION, credentials: {accessKeyId:process.env.AWS_ACCESS_KEY_ID!, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!}})
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -24,4 +26,4 @@ const translateConfig = { marshallOptions, unmarshallOptions };
 // Create the DynamoDB Document client.
 const ddbDoc = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 
-export { ddbDoc };
+export { ddbDoc }*/

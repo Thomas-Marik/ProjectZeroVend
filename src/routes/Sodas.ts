@@ -8,6 +8,18 @@ const sodaDao = new SodaDao();
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 
+/**
+ * Get all users.
+ * 
+ * @param req 
+ * @param res 
+ * @returns 
+ */
+/*
+export async function getAllSodas(req: Request, res: Response) {
+    const sodas = await sodaDao.getAll();
+    return res.status(OK).json({sodas});
+*/
 
 /**
  * Get all users.
@@ -16,10 +28,17 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
  * @param res 
  * @returns 
  */
-export async function getAllUsers(req: Request, res: Response) {
-    const users = await sodaDao.getAll();
-    return res.status(OK).json({users});
-}
+/*
+export async function getAllSodas(req: Request, res: Response) {
+    try {
+        const sodas = await sodaDao.getAll({
+            TableName: 'vendingmachine',
+
+        });
+    return res.status(OK).json({sodas});
+}catch(err){
+
+}finally{},
 
 
 /**
@@ -29,7 +48,7 @@ export async function getAllUsers(req: Request, res: Response) {
  * @param res 
  * @returns 
  */
-export async function addOneUser(req: Request, res: Response) {
+export async function addOneSoda(req: Request, res: Response) {
     const { soda } = req.body;
     if (!soda) {
         return res.status(BAD_REQUEST).json({
@@ -48,7 +67,7 @@ export async function addOneUser(req: Request, res: Response) {
  * @param res 
  * @returns 
  */
-export async function updateOneUser(req: Request, res: Response) {
+export async function updateOneSoda(req: Request, res: Response) {
     const { soda } = req.body;
     if (!soda) {
         return res.status(BAD_REQUEST).json({
@@ -68,8 +87,9 @@ export async function updateOneUser(req: Request, res: Response) {
  * @param res 
  * @returns 
  */
-export async function deleteOneUser(req: Request, res: Response) {
+/*
+export async function deleteOneSoda(req: Request, res: Response) {
     const { id } = req.params;
     await sodaDao.delete(String(id));
     return res.status(OK).end();
-}
+}*/

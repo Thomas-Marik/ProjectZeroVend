@@ -3,21 +3,23 @@
 export interface ISoda {
     id: string;
     brand: string;
-    distributor?: string;
-    diet?:boolean;
-    caffeine?:boolean;
-    color?:string;
+    distributor: string;
+    diet:boolean;
+    caffeine:boolean;
+    color:string;
 }
 class Soda implements ISoda{
     public id:string;
     public brand:string;
-    public distributor?:string;
-    public diet?:boolean;
-    public caffeine?:boolean;
-    public color?:string;
+    public distributor:string;
+    public diet:boolean;
+    public caffeine:boolean;
+    public color:string;
 
-
-    constructor(id:string | ISoda,brand:string,distributor?:string,diet?:boolean,caffeine?:boolean,color?:string){
+ 
+    
+        
+    constructor(id:string | ISoda,brand:string,distributor:string,diet:boolean,caffeine:boolean,color:string){
         
     if (typeof id === 'string') {
         this.id=id;

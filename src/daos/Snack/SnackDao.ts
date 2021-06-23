@@ -1,43 +1,48 @@
-import Soda, { ISoda } from '@entities/Soda';
+import Snack, { ISnack } from '../../entities/Snack';
 import {ddbDoc,ddbb} from '../dynamo';
 import { DeleteItemCommand, DynamoDBClient, GetItemCommand, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import {PutCommand, DeleteCommand, DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb';
 import  * as AWS from 'aws-sdk';
 import { promises } from 'fs';
-import { DataBrew } from 'aws-sdk';
-//import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+
 const ddb = new AWS.DynamoDB.DocumentClient();
 
-export interface ISodaDao {
+export interface ISnackDao {
     //getOne: (brand: string) => Promise<ISoda | null>;
     //getAll: () => Promise<ISoda[]>;
-    add: (soda: ISoda) => Promise<void>;
-    update: (soda: ISoda) => Promise<void>;
+    add: (snack: ISnack) => Promise<void>;
+    update: (snack: ISnack) => Promise<void>;
     //delete: (id: string) => Promise<void>;
 }
 
-class SodaDao implements ISodaDao {
+class SnackDao implements ISnackDao {
     
     private TABLE_NAME = 'vendingmachine';
     
     
-    /*
-    public getOne(id: string): Promise<ISoda | null> {
+    /**
+     * @param email
+     *
+    *//*
+    public async getOne(id: string): Promise<ISoda | null> {
         const params = {
             TableName: 'vendingmachine',
             Key: {
-              'id': id
-            }
-        
+              'id': {S: '001'}
+            },
+            ProjectionExpression: 'id'
           };
           
           // Call DynamoDB to read the item from the table
-          ddb.get(params).promise();
-          
-      */     
-        
-    /*
-      const getAll= async()=> {
+          await ddb.get(params, function(err, data) {
+            if (err) {
+              console.log("Error", err);
+            } else {
+              console.log("Success", data.Item);
+            }
+          })
+        }
+   /*const getAll= async()=> {
       const params = {
             TableName:'vendingmachine',   
             
@@ -48,24 +53,23 @@ class SodaDao implements ISodaDao {
           
         return sodas;
     }
-*
-          }
+
+
     /**
      *
      * @param user
      */
-    public async add(soda: ISoda): Promise<void> {
+    public async add(snack: ISnack): Promise<void> {
         const params = {
             TableName: this.TABLE_NAME,
-            Item: soda
+            Item: snack
           };
           
           // Call DynamoDB to add the item to the table
          
              await ddbDoc.send(new PutCommand(params)); 
         
-        
-}
+    }
                  
 
 
@@ -73,12 +77,10 @@ class SodaDao implements ISodaDao {
      *
      * @param user
      */
-    public async update(soda: ISoda): Promise<void> {
+    public async update(snack: ISnack): Promise<void> {
         const params = {
             TableName: this.TABLE_NAME,
-            Item: soda,
-
-            
+            Item: snack,            
           };
           
           // Call DynamoDB to add the item to the table
@@ -89,18 +91,25 @@ class SodaDao implements ISodaDao {
 }
 
 
-public async delete(id: string): Promise<void> {
-    const params = {
-         TableName:this.TABLE_NAME,
-         Key: {
-             id:{S : id}
-         },
-     }
-       
-       // Call DynamoDB to delete the item from the table
-       ddb.delete(params).promise();
-
-       
-     
- }}
-export default SodaDao;
+    /**
+     *
+     * @param id
+     */
+    
+    public async delete(id: string): Promise<void> {
+       const params = {
+            TableName:this.TABLE_NAME,
+            Key: {
+                id:{S: id}
+            },
+        }
+          
+          // Call DynamoDB to delete the item from the table
+          ddb.delete(params).promise();
+  
+          
+        
+    }}
+         
+export default SnackDao;
+    
